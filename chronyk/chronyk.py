@@ -327,7 +327,7 @@ class Chronyk:
             "seconds": 0
         }
 
-        for key in delta.keys():
+        for key in list(delta.keys()):
             if timestr.find(" " + key[:-1]) != -1:
                 try:
                     match = re.match(
@@ -340,7 +340,7 @@ class Chronyk:
                     pass
 
         if not future:
-            for key in delta.keys():
+            for key in list(delta.keys()):
                 delta[key] *= -1
 
         dati = dati + datetime.timedelta(**delta)
@@ -745,7 +745,7 @@ class ChronykDelta:
             "year": 3600 * 24 * 365
         }
 
-        for k, v in comps.items():
+        for k, v in list(comps.items()):
             try:
                 match = re.match(
                     re.compile(".*?([0-9]+?) "+k),
@@ -800,7 +800,7 @@ class ChronykDelta:
         values["minute"] = values["minute"] if values["minute"] > 0 else 0
         values["second"] = _round(seconds - values["minute"] * 60)
 
-        for k, v in values.items():
+        for k, v in list(values.items()):
             if v == 0:
                 values.pop(k)
             else:
